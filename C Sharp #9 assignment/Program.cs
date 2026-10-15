@@ -39,6 +39,15 @@
             //Q4/ no it cannot
 
             #endregion
+
+            #region Fifth Question
+
+            //Q1/ is a class its members are divided in two different places
+            //Q2/ to organize the code
+            //Q3/ is a method its functionality is divided in to different places or its body is implemented in a different place
+            //Q4/ it drops a compile-time error
+
+            #endregion
         }
     }
 }
