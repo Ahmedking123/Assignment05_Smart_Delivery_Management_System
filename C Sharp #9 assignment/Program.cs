@@ -30,6 +30,15 @@
             //Q4/static class is a class that can't create an instance from it,no it is not possible
 
             #endregion
+
+            #region Fourth question
+
+            //Q1/ extansions method adds new method to the existing datat types without modifying it
+            //Q2/ this keyword
+            //Q3/ static class
+            //Q4/ no it cannot
+
+            #endregion
         }
     }
 }
