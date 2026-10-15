@@ -1,4 +1,6 @@
-﻿namespace C_Sharp__9_assignment
+﻿using C_Sharp__9_assignment.Shipments;
+
+namespace C_Sharp__9_assignment
 {
     internal class Program
     {
@@ -46,6 +48,103 @@
             //Q2/ to organize the code
             //Q3/ is a method its functionality is divided in to different places or its body is implemented in a different place
             //Q4/ it drops a compile-time error
+
+            #endregion
+
+            #region Practical Part
+
+            //Creating delivery center
+            DeliveryCenter.CenterName = "Mansoura Delivery Center";
+            Driver driver = new Driver("Ahmed");
+            DeliveryCenter deliveryCenter = new DeliveryCenter(driver);
+
+            DeliveryUtilities.PrintSystemTitle();
+            Console.WriteLine("\n\nShipment System Initialized\n\n");
+            DeliveryUtilities.PrintSeperator();
+            
+            //Creating shipments
+            Console.WriteLine("\nTotal Shipment created: " + Shipment.GetTotalShipmentCreated());
+            DeliveryUtilities.PrintSeperator();
+            Console.WriteLine("Creating Shipments.....");
+            DeliveryUtilities.PrintSeperator();
+
+            Shipment standardShipment = new StandardShipment("Sh 001", "Laptop", 2.3m, 50m, new DeliveryAddress("Mansoura", "Ahmed maher", 20));
+            Shipment expressShipment = new ExpressShipment("Sh 002", "Phone", 0.217m, 50m, new DeliveryAddress("Mansoura", "El Gomhoria", 37), 20);
+            Shipment internationalShipment = new InternationalShipment("Sh 003", "AMD CPU", 0.120m, 2000, new DeliveryAddress("Brooklyn", "Arnold", 12), "USA", 400m);
+
+            deliveryCenter.AddShipment(standardShipment);
+            deliveryCenter.AddShipment(expressShipment);
+            deliveryCenter.AddShipment(internationalShipment);
+
+            DeliveryUtilities.PrintSeperator();
+            Console.WriteLine("Total Shipment created: " + Shipment.GetTotalShipmentCreated());
+
+            //Object copying
+            DeliveryUtilities.PrintSeperator();
+            Console.WriteLine("Object Copying");
+            DeliveryUtilities.PrintSeperator();
+
+            Shipment shipment = standardShipment;
+            Console.WriteLine("Orignal shipment: " + standardShipment.TrackingCode);
+            Console.WriteLine("Copied shipmeent: " + shipment.TrackingCode);
+            Console.WriteLine();
+            Console.WriteLine("Same shipment: " + (shipment == standardShipment).ToString());
+
+            //Shallow copy
+            DeliveryUtilities.PrintSeperator();
+            Console.WriteLine("Shallow Copy");
+            DeliveryUtilities.PrintSeperator();
+
+            shipment = standardShipment.ShallowCopy();
+
+            Console.WriteLine("Original shipment address: " + standardShipment.Destination.City);
+            Console.WriteLine("Copied shipment address: " + shipment.Destination.City);
+            Console.WriteLine();
+            Console.WriteLine("Changing address.......");
+            standardShipment.Destination.City = "Nasr city";
+            Console.WriteLine();
+            Console.WriteLine("Original shipment address: " + standardShipment.Destination.City);
+            Console.WriteLine("Copied shipment address: " + shipment.Destination.City);
+            Console.WriteLine();
+            Console.WriteLine("Same address :" + (standardShipment.Destination.City == shipment.Destination.City).ToString());
+
+            //Deep copy
+            DeliveryUtilities.PrintSeperator();
+            Console.WriteLine("Deep copy");
+            DeliveryUtilities.PrintSeperator();
+            Console.WriteLine();
+
+            shipment = standardShipment.DeepCopy();
+
+            Console.WriteLine("Original shipment address: " + standardShipment.Destination.City);
+            Console.WriteLine("Copied shipment address: " + shipment.Destination.City);
+            Console.WriteLine();
+            Console.WriteLine("Changing address......");
+            standardShipment.Destination.City = "Mansoura";
+            Console.WriteLine();
+            Console.WriteLine("Original shipment address: " + standardShipment.Destination.City);
+            Console.WriteLine("Copied shipment address: " + shipment.Destination.City);
+            Console.WriteLine();
+            Console.WriteLine("Same address :" + (standardShipment.Destination.City == shipment.Destination.City).ToString());
+
+            //Extension Methods
+            DeliveryUtilities.PrintSeperator();
+            standardShipment.GetSummary();
+            Console.WriteLine();
+            expressShipment.GetSummary();
+            Console.WriteLine();
+            internationalShipment.GetSummary();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine($"{standardShipment.TrackingCode} Is Delivered: {standardShipment.IsDelivered()}");
+            Console.WriteLine($"{expressShipment.TrackingCode} Is Delivered: {expressShipment.IsDelivered()}");
+            
+            //Partial Method
+            DeliveryUtilities.PrintSeperator();
+            Console.WriteLine("Partial Method");
+            DeliveryUtilities.PrintSeperator();
+            standardShipment.UpdateTrackingStatus("Is Delivered");
+            DeliveryUtilities.PrintSeperator();
 
             #endregion
         }
